@@ -1,0 +1,12 @@
+:host {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .weather-info {
+
+    &-item {
+      margin: 7px;
+    }
+  }
+}

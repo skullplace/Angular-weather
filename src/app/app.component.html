@@ -1,1 +1,9 @@
-<router-outlet></router-outlet>
+<div class="content">
+  <mat-tab-group (selectedTabChange)="tabChange($event.index)" color="accent" backgroundColor="primary" mat-align-tabs="center">
+    <mat-tab label="Погода по названию"> </mat-tab>
+    <mat-tab label="Погода по ip или координатам"> </mat-tab>
+  </mat-tab-group>
+</div>
+  <router-outlet></router-outlet>
+
+

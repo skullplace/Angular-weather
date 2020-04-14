@@ -16,6 +16,12 @@ export class ValidationDateRequestInterceptor implements HttpInterceptor {
 
   constructor(private cache: CacheService) {}
 
+  /**
+   * interceptor, that decides whether to send a request or not, based on the time elapsed from the last request
+   * @param {HttpRequest<any>} request
+   * @param {HttpHandler} next
+   * @return {Observable<HttpEvent<any>>}
+   */
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const cacheItem = this.cache.get<OpenWeatherDto>(request.url);
 

@@ -49,6 +49,7 @@ export type OpenWeatherWindDto = {
 export type OpenWeatherSysDto = {
   type: number,
   id: number,
+  humidity: number,
   country: OpenWeatherSysCountryDto,
   sunrise: number,
   sunset: number
@@ -59,5 +60,6 @@ export type OpenWeatherCloudsDto = {
 };
 
 export enum OpenWeatherSysCountryDto {
-  By = 'BY'
+  By = 'BY',
+  Ru = 'RU'
 }

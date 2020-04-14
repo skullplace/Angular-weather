@@ -10,10 +10,11 @@ import {OpenWeatherModule} from './page-modules/open-weather/open-weather.module
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ValidationDateRequestInterceptor} from './core-modules/rest-core-module/interceptors/validation-date-request.interceptor';
 import {CacheService} from './core-modules/rest-core-module/services/cache.service';
+import { WeatherInfoComponent } from './common-ui/weather-info/weather-info.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +28,9 @@ import {CacheService} from './core-modules/rest-core-module/services/cache.servi
     // Page-modules
     OpenWeatherModule
   ],
-  exports: [MaterialCoreModule],
+  exports: [
+    MaterialCoreModule
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
