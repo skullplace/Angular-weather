@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {HttpService} from './core-modules/rest-core-module/services/http.service';
 
 @Component({
   selector: 'app-root',

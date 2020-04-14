@@ -1,0 +1,8 @@
+<div class="content">
+    <form class="location-form" [formGroup]="form" (submit)="getWeather()">
+        <mat-form-field class="full-width">
+            <input matInput placeholder="location" formControlName="location" >
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Узнать</button>
+    </form>
+</div>
