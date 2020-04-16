@@ -17,6 +17,7 @@ export class HttpService {
    * @return {Observable<T>}
    */
   get<T>(url: string, params: RequestParams): Observable<T> {
+    console.log(url.replace('location', params.location).replace('api-key', params.key));
     return  this.http.get<T>(
       url.replace('location', params.location).replace('api-key', params.key)
     );

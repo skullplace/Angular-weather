@@ -12,7 +12,7 @@ import {OpenWeatherDto} from '../resources/rest-core-model';
 
 @Injectable()
 export class ValidationDateRequestInterceptor implements HttpInterceptor {
-  private readonly LAST_REQUEST_DATE_INTERVAL: number = 10000;
+  private readonly LAST_REQUEST_DATE_INTERVAL: number = 2 * 60 * 60 * 1000 ;
 
   constructor(private cache: CacheService) {}
 

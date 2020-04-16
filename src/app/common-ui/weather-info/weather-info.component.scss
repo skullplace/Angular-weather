@@ -4,9 +4,17 @@
   justify-content: center;
 
   .weather-info {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
 
     &-item {
       margin: 7px;
+      flex: 50%
     }
+
+
   }
 }

@@ -1,9 +1,15 @@
 <div class="content">
-  <mat-tab-group (selectedTabChange)="tabChange($event.index)" color="accent" backgroundColor="primary" mat-align-tabs="center">
-    <mat-tab label="Погода по названию"> </mat-tab>
-    <mat-tab label="Погода по ip или координатам"> </mat-tab>
-  </mat-tab-group>
+
+  <nav mat-tab-nav-bar backgroundColor="primary" color="accent" mat-align-tabs="center">
+<!--      <a mat-tab-link class="tab" routerLink="" routerLinkActive="active-tab" [routerLinkActiveOptions]="{exact: true}"> Погода по названию</a>-->
+<!--      <a mat-tab-link class="tab" routerLink="/alternative" routerLinkActive="active-tab"> Погода по ip или координатам</a>-->
+    <a mat-tab-link *ngFor="let route of routes"
+       [routerLink]="route.route"
+       routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact: true}" > {{route.name}} </a>
+  </nav>
 </div>
   <router-outlet></router-outlet>
 
 
+<!--[active]="activeLink == route.name"-->

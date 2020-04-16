@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {IpOrCoordsComponent} from './ip-or-coords.component';
-
+import { OpenWeatherComponent } from './open-weather.component';
 
 const routes: Routes = [
-  {path: '', component: IpOrCoordsComponent}
+  {path: '', component: OpenWeatherComponent}
 ];
 
 @NgModule({
+  declarations: [],
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class IpOrCoordsRoutingModule { }
+export class OpenWeatherRoutingModule { }

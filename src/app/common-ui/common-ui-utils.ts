@@ -9,3 +9,19 @@ export function getLabelDayByNumber(index: number): string {
     6: 'СБ',
   }[index];
 }
+
+export const addition = {
+  date: 'Дата: ',
+  day: 'День недели',
+  humidity: 'Влажность ',
+  temp: 'Температура ',
+  feels_like: 'Ощущается как ',
+  celsius: '℃',
+  pressure: 'Давление',
+  pressureUnit: 'мм. рт. ст.',
+  speed: 'Скорость ветра ',
+  speedUnit: 'м/с',
+  deg: 'Направление ветра',
+  degrees: '°',
+  percent: '%'
+};

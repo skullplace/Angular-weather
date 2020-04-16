@@ -2,7 +2,7 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {OpenWeatherDto} from '../../core-modules/rest-core-module/resources/rest-core-model';
 import {WeatherInfo} from '../resources/common-ui-model';
 import {formatDate} from '@angular/common';
-import {getLabelDayByNumber} from '../common-ui-utils';
+import {addition, getLabelDayByNumber} from '../common-ui-utils';
 
 @Component({
   selector: 'app-weather-info',
@@ -13,6 +13,7 @@ export class WeatherInfoComponent implements OnInit, OnChanges {
   @Input() data: OpenWeatherDto;
 
   public weatherInfo: WeatherInfo;
+  public addition;
 
   constructor() { }
 
@@ -21,16 +22,18 @@ export class WeatherInfoComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data && this.data) {
+      console.log(this.data);
       this.weatherInfo = {
         date: formatDate(new Date(this.data.dt * 1000), 'dd.MM.yyyy', 'en-US'),
         day: getLabelDayByNumber(new Date(this.data.dt * 1000).getDay()),
-        humidity: this.data.sys.humidity,
-        temp: this.data.main.temp,
-        feels_like: this.data.main.feels_like,
+        humidity: this.data.main.humidity,
+        temp: (this.data.main.temp - 273).toFixed(0),
+        feels_like: (this.data.main.feels_like - 273).toFixed(0),
         pressure: this.data.main.pressure,
         speed: this.data.wind.speed,
         deg: this.data.wind.deg,
       };
+      this.addition = addition;
     }
   }
 

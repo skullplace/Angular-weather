@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { OpenWeatherComponent } from './page-modules/open-weather/open-weather.component';
-import {IpOrCoordsModule} from './page-modules/ip-or-coords/ip-or-coords.module';
+
 
 
 const routes: Routes = [
-  {path: '' , component: OpenWeatherComponent},
-  {path: 'alternative', loadChildren: () => import('./page-modules/ip-or-coords/ip-or-coords.module').then(m => m.IpOrCoordsModule)},
+  {path: '' , loadChildren: () => import('./page-modules/open-weather/open-weather.module').then(m => m.OpenWeatherModule)},
+  {path: 'alternative', loadChildren: () => import('./page-modules/weather-stack/weather-stack.module').then(m => m.WeatherStackModule)},
 ];
 
 @NgModule({

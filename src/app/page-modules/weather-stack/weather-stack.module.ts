@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { IpOrCoordsRoutingModule } from './ip-or-coords-routing.module';
-import { IpOrCoordsComponent } from './ip-or-coords.component';
+import { WeatherStackRoutingModule } from './weather-stack-routing.module';
+import { WeatherStackComponent } from './weather-stack.component';
 import {AppModule} from '../../app.module';
 import {CommonUiModule} from '../../common-ui/common-ui.module';
 
 
 @NgModule({
-  declarations: [IpOrCoordsComponent],
+  declarations: [WeatherStackComponent],
   imports: [
     CommonModule,
-    IpOrCoordsRoutingModule,
+    WeatherStackRoutingModule,
     CommonUiModule
   ]
 })
-export class IpOrCoordsModule { }
+export class WeatherStackModule { }

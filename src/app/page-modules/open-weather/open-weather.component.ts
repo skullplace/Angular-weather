@@ -29,18 +29,17 @@ export class OpenWeatherComponent implements OnInit {
     //   position => console.log(position),
     //   accessDinied => console.log('ne poshlo')
     //   /api/location/search/?lattlong=(latt),(long) - погода по коордам
-    //   http://ip-jobs.staff-base.spb.ru/ip.cgi  - ip
-    //   https://htmlweb.ru/geo/ip_api_example.php
-    //   http://htmlweb.ru/geo/api.php?json&ip=IP_АДРЕС&api_key=API_KEY_из_профиля
-    //   a988dedebd0ec79524b21bd43933b283
+    //
+    //   http://free.ipwhois.io/json/
     // );
 
+    this.getWeather();
   }
 
   /**
    *
    */
   getWeather(): void {
-    this.restService.getOpenWeather(this.form.value.location.toLowerCase()).subscribe(data => this.weatherInfo = data);
+    this.restService.getOpenWeather().subscribe(data => this.weatherInfo = data);
   }
 }

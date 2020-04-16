@@ -2,8 +2,8 @@ export type WeatherInfo = {
   date: string,
   day: string,
   humidity: number,
-  temp: number,
-  feels_like: number,
+  temp: string,
+  feels_like: string,
   pressure: number,
   speed: number,
   deg: number

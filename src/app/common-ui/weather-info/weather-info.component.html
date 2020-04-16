@@ -1,27 +1,27 @@
 <div class="weather-info">
   <div class="weather-info-item weather-info-date">
-    {{weatherInfo?.date}}
+    {{addition?.date}} {{weatherInfo?.date}}
   </div>
   <div class="weather-info-item weather-info-day">
-    {{weatherInfo?.day}}
+    {{addition?.day}} {{weatherInfo?.day}}
   </div>
   <div class="weather-info-item weather-info-humidity">
-    {{weatherInfo?.humidity}}
+    {{addition?.humidity}} {{weatherInfo?.humidity}} {{addition?.percent}}
   </div>
   <div class="weather-info-item weather-info-temperature">
-    {{weatherInfo?.temp}}
-  </div>
-  <div class="weather-info-item weather-info-wind-speed">
-    {{weatherInfo?.speed}}
-  </div>
-  <div class="weather-info-item weather-info-wind-deg">
-    {{weatherInfo?.deg}}
+    {{addition?.temp}} {{weatherInfo?.temp}} {{addition?.celsius}}
   </div>
   <div class="weather-info-item weather-info-feels-like">
-    {{weatherInfo?.feels_like}}
+    {{addition?.feels_like}} {{weatherInfo?.feels_like}} {{addition?.celsius}}
+  </div>
+  <div class="weather-info-item weather-info-wind-speed">
+    {{addition?.speed}} {{weatherInfo?.speed}} {{addition?.speedUnit}}
+  </div>
+  <div class="weather-info-item weather-info-wind-deg">
+    {{addition?.deg}} {{weatherInfo?.deg}} {{addition?.degrees}}
   </div>
   <div class="weather-info-item weather-info-pressure">
-    {{weatherInfo?.pressure}}
+    {{addition?.pressure}} {{weatherInfo?.pressure}} {{addition?.pressureUnit}}
   </div>
   <div class="weather-info-item weather-info-description">
     иконка
