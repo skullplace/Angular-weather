@@ -4,19 +4,21 @@ export type RequestParams = {
 };
 
 export type OpenWeatherDto = {
-  coord: OpenWeatherCoordsDto,
-  weather: OpenWeatherDescriptionDto,
-  base: string,
-  main: OpenWeatherMainDto,
-  visibility: number,
-  wind: OpenWeatherWindDto,
-  clouds: OpenWeatherCloudsDto,
-  dt: number,
-  sys: OpenWeatherSysDto,
-  timezone: number,
-  id: number,
-  name: string,
-  cod: number,
+  main: {
+    coord: OpenWeatherCoordsDto,
+    weather: OpenWeatherDescriptionDto,
+    base: string,
+    main: OpenWeatherMainDto,
+    visibility: number,
+    wind: OpenWeatherWindDto,
+    clouds: OpenWeatherCloudsDto,
+    dt: number,
+    sys: OpenWeatherSysDto,
+    timezone: number,
+    id: number,
+    name: string,
+    cod: number,
+  }
 };
 
 export type OpenWeatherCoordsDto = {
@@ -94,4 +96,49 @@ export type IpWhoIsDto = {
   currency_rates: string,
   currency_plural: string,
   completed_requests: number
-}
+};
+
+export type WeatherStackDto = {
+  request: WeatherStackRequestDto,
+  location: WeatherStackLocationDto,
+  current: WeatherStackCurrentDto,
+
+};
+
+export type WeatherStackLocationDto = {
+  name: string,
+  country: string,
+  region: string,
+  lat: string,
+  lon: string,
+  timezone_id: string,
+  localtime: string,
+  localtime_epoch: number,
+  utc_offset: string
+};
+
+export type WeatherStackCurrentDto = {
+  observation_time: string,
+  temperature: number,
+  weather_code: number,
+  weather_icons: [],
+  weather_descriptions: [],
+  wind_speed: number,
+  wind_degree: number,
+  wind_dir: string,
+  pressure: number,
+  precip: number,
+  humidity: number,
+  cloudcover: number,
+  feelslike: number,
+  uv_index: number,
+  visibility: number,
+  is_day: string,
+};
+
+export type WeatherStackRequestDto = {
+  type: string,
+  query: string,
+  language: string,
+  unit: string,
+};

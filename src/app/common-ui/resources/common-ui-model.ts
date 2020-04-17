@@ -6,5 +6,5 @@ export type WeatherInfo = {
   feels_like: string,
   pressure: number,
   speed: number,
-  deg: number
+  deg: number,
 };

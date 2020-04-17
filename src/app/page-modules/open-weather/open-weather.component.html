@@ -1,10 +1,10 @@
-<div class="content">
-    <form class="location-form" [formGroup]="form" (submit)="getWeather()">
-        <mat-form-field class="input-field">
-            <input matInput placeholder="Укажите населенный пункт" formControlName="location" >
-        </mat-form-field>
-        <button mat-raised-button color="primary" type="submit">Узнать</button>
-    </form>
-</div>
+<!--<div class="content">-->
+<!--    <form class="location-form" [formGroup]="form" (submit)="getWeather()">-->
+<!--        <mat-form-field class="input-field">-->
+<!--            <input matInput placeholder="Укажите населенный пункт" formControlName="location" >-->
+<!--        </mat-form-field>-->
+<!--        <button mat-raised-button color="primary" type="submit">Узнать</button>-->
+<!--    </form>-->
+<!--</div>-->
 
-<app-weather-info [data]="weatherInfo"></app-weather-info>
+<app-weather-info [data]="weatherInfo" [cameFrom]="'open-weather'"></app-weather-info>

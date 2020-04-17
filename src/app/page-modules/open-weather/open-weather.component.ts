@@ -25,14 +25,6 @@ export class OpenWeatherComponent implements OnInit {
       location: ''
     });
 
-    // navigator.geolocation.getCurrentPosition(
-    //   position => console.log(position),
-    //   accessDinied => console.log('ne poshlo')
-    //   /api/location/search/?lattlong=(latt),(long) - погода по коордам
-    //
-    //   http://free.ipwhois.io/json/
-    // );
-
     this.getWeather();
   }
 
@@ -40,6 +32,6 @@ export class OpenWeatherComponent implements OnInit {
    *
    */
   getWeather(): void {
-    this.restService.getOpenWeather().subscribe(data => this.weatherInfo = data);
+    this.restService.getOpenWeather().subscribe((data: OpenWeatherDto) => this.weatherInfo = data);
   }
 }

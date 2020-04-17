@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {RestService} from '../../core-modules/rest-core-module/resources/rest.service';
-import {OpenWeatherCoordsDto} from '../../core-modules/rest-core-module/resources/rest-core-model';
+import {OpenWeatherCoordsDto, WeatherStackDto} from '../../core-modules/rest-core-module/resources/rest-core-model';
 
 @Component({
   selector: 'app-ip-or-coords',
@@ -9,12 +9,14 @@ import {OpenWeatherCoordsDto} from '../../core-modules/rest-core-module/resource
 })
 export class WeatherStackComponent implements OnInit {
 
+  public weatherInfo: WeatherStackDto;
+
   constructor(
     private restService: RestService,
   ) { }
 
   ngOnInit(): void {
-    this.restService.getWeatherStack().subscribe(v => console.log(v));
+    this.restService.getWeatherStack().subscribe((data: WeatherStackDto) => this.weatherInfo = data);
   }
 
 }
