@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import {HttpService} from '../../core-modules/rest-core-module/services/http.service';
 import {RestService} from '../../core-modules/rest-core-module/resources/rest.service';
 import {OpenWeatherDto} from '../../core-modules/rest-core-module/resources/rest-core-model';
+import {WeatherInfo} from '../../common-ui/resources/common-ui-model';
 
 
 @Component({
@@ -10,10 +11,10 @@ import {OpenWeatherDto} from '../../core-modules/rest-core-module/resources/rest
   templateUrl: 'open-weather.component.html',
   styleUrls: ['open-weather.component.scss']
 })
-export class OpenWeatherComponent implements OnInit {
+export class OpenWeatherComponent implements OnInit, AfterViewInit {
   public form: FormGroup;
 
-  public weatherInfo: OpenWeatherDto;
+  public weatherInfo: WeatherInfo;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,13 +26,20 @@ export class OpenWeatherComponent implements OnInit {
       location: ''
     });
 
-    this.getWeather();
+
   }
 
   /**
    *
    */
   getWeather(): void {
-    this.restService.getOpenWeather().subscribe((data: OpenWeatherDto) => this.weatherInfo = data);
+    this. weatherInfo = this.restService.getOpenWeather();
+  }
+
+
+
+  ngAfterViewInit(): void {
+    this.getWeather();
+    console.log(this.weatherInfo);
   }
 }

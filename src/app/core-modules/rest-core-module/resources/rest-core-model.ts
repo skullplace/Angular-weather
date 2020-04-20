@@ -4,21 +4,19 @@ export type RequestParams = {
 };
 
 export type OpenWeatherDto = {
-  main: {
-    coord: OpenWeatherCoordsDto,
-    weather: OpenWeatherDescriptionDto,
-    base: string,
-    main: OpenWeatherMainDto,
-    visibility: number,
-    wind: OpenWeatherWindDto,
-    clouds: OpenWeatherCloudsDto,
-    dt: number,
-    sys: OpenWeatherSysDto,
-    timezone: number,
-    id: number,
-    name: string,
-    cod: number,
-  }
+  coord: OpenWeatherCoordsDto,
+  weather: OpenWeatherDescriptionDto,
+  base: string,
+  main: OpenWeatherMainDto,
+  visibility: number,
+  wind: OpenWeatherWindDto,
+  clouds: OpenWeatherCloudsDto,
+  dt: number,
+  sys: OpenWeatherSysDto,
+  timezone: number,
+  id: number,
+  name: string,
+  cod: number,
 };
 
 export type OpenWeatherCoordsDto = {
@@ -97,6 +95,39 @@ export type IpWhoIsDto = {
   currency_plural: string,
   completed_requests: number
 };
+
+export type IpIfyDto = {
+  ip: string;
+};
+
+export type IpApiDto = {
+  ip: string,
+  type: string,
+  continent_code: string,
+  continent_name: string,
+  country_code: string,
+  country_name: string,
+  region_code: string,
+  region_name: string,
+  city: string,
+  zip: string,
+  latitude: number,
+  longitude: number,
+  location: IpApiLocationDto
+};
+
+export type IpApiLocationDto = {
+  geoname_id: number,
+  capital: string,
+  languages: [],
+  country_flag: string,
+  country_flag_emoji: string,
+  country_flag_emoji_unicode: string,
+  calling_code: string,
+  is_eu: boolean,
+};
+
+
 
 export type WeatherStackDto = {
   request: WeatherStackRequestDto,
