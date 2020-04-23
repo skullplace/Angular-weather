@@ -7,4 +7,6 @@ export type WeatherInfo = {
   pressure: number,
   speed: number,
   deg: number,
+  city: string,
+  icon?: string
 };

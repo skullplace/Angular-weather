@@ -8,7 +8,7 @@ import {WeatherInfo} from '../../common-ui/resources/common-ui-model';
   templateUrl: './weather-stack.component.html',
   styleUrls: ['./weather-stack.component.scss']
 })
-export class WeatherStackComponent implements OnInit, AfterContentChecked {
+export class WeatherStackComponent implements OnInit {
 
   public weatherInfo: WeatherInfo;
 
@@ -17,15 +17,9 @@ export class WeatherStackComponent implements OnInit, AfterContentChecked {
   ) { }
 
   ngOnInit(): void {
-    this.restService.getWeatherStack().subscribe(v => console.log(v));
-  }
-
-  ngAfterContentChecked(): void {
-
-  }
-
-  getWeather() {
-
+    this.restService.getWeatherStack().subscribe(weather => {
+      this.weatherInfo = weather;
+    });
   }
 
 }

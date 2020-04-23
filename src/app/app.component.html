@@ -5,11 +5,8 @@
 <!--      <a mat-tab-link class="tab" routerLink="/alternative" routerLinkActive="active-tab"> Погода по ip или координатам</a>-->
     <a mat-tab-link *ngFor="let route of routes"
        [routerLink]="route.route"
-       routerLinkActive="active"
+       routerLinkActive="active-tab"
        [routerLinkActiveOptions]="{exact: true}" > {{route.name}} </a>
   </nav>
 </div>
   <router-outlet></router-outlet>
-
-
-<!--[active]="activeLink == route.name"-->

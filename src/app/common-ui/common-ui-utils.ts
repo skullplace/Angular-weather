@@ -25,3 +25,14 @@ export const addition = {
   degrees: '°',
   percent: '%'
 };
+
+export const icons = {
+  clouds: 'https://img.icons8.com/color/96/000000/cloud.png',
+  sunny: 'https://img.icons8.com/color/96/000000/summer.png',
+  rainy: 'https://img.icons8.com/color/96/000000/heavy-rain.png',
+  snow: 'https://img.icons8.com/color/96/000000/snow.png',
+  clear: 'https://img.icons8.com/color/96/000000/summer.png',
+  'scattered clouds': 'https://img.icons8.com/color/96/000000/partly-cloudy-day.png',
+  'broken clouds': 'https://img.icons8.com/color/96/000000/partly-cloudy-day.png',
+  'overcast clouds' : 'https://img.icons8.com/color/96/000000/partly-cloudy-day.png'
+};

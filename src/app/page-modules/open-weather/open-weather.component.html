@@ -1,10 +1,15 @@
-<!--<div class="content">-->
-<!--    <form class="location-form" [formGroup]="form" (submit)="getWeather()">-->
-<!--        <mat-form-field class="input-field">-->
-<!--            <input matInput placeholder="Укажите населенный пункт" formControlName="location" >-->
-<!--        </mat-form-field>-->
-<!--        <button mat-raised-button color="primary" type="submit">Узнать</button>-->
-<!--    </form>-->
-<!--</div>-->
+<div class="form-content" *ngIf="isInputVisible; else result">
+  <form class="location-form" [formGroup]="form" (submit)="getWeather()">
+    <mat-form-field class="input-field">
+      <input matInput placeholder="Укажите населенный пункт" formControlName="location">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Узнать</button>
+  </form>
+</div>
 
-<app-weather-info [data]="weatherInfo" [cameFrom]="'open-weather'"></app-weather-info>
+<ng-template #result>
+  <app-weather-info [data]="weatherInfo" [cameFrom]="'open-weather'"></app-weather-info>
+  <button mat-flat-button (click)="isInputVisible = true">< Узнать погоду в другом городе</button>
+</ng-template>
+
+

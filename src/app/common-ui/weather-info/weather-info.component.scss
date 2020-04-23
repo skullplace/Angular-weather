@@ -10,12 +10,104 @@
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+    width: 50%;
+    height: 40%;
+    min-height: 330px;
+    background: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 7px -1px rgba(0, 0, 0, 0.2), 0px 3px 3px 1px rgba(0, 0, 0, 0.14), 3px 3px 5px 2px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    margin: auto 0;
+    padding: 10px;
 
     &-item {
       margin: 7px;
-      //flex: 50%
     }
 
+    &-city {
+      align-self: stretch;
+      font-size: 22px;
+    }
 
+    &-date {
+      align-self: stretch;
+    }
+
+    &-icon {
+      align-self: center;
+
+    }
+
+    &-temperature {
+      align-self: flex-end;
+      //text-align: right;
+      font-size: 66px;
+    }
+
+    &-addition {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      margin-top: 5%;
+      justify-content: space-between;
+      overflow-x: auto;
+      flex-shrink: 0;
+      flex-basis: 89px;
+      flex-grow: 1;
+    }
+
+    &-addition::-webkit-scrollbar {
+      width: 3px;
+      height: 3px;
+
+      &-button {
+        background-color: #999;
+        width: 0;
+      }
+
+      &-track {
+        background-color: #999;
+      }
+
+      &-piece {
+        background-color: #ffffff;
+      }
+
+      &-thumb {
+        height: 50px;
+        background-color: #666;
+        border-radius: 3px;
+      }
+
+      &-corner {
+        background-color: #999;
+      }
+    }
+
+    &-resizer {
+      background-color: #666;
+    }
   }
+
+
+//weather-info {
+//  display: grid;
+//  width: 50%;
+//  height: 40%;
+//  min-height: 330px;
+//  background: rgba(0, 0, 0, 0.05);
+//  box-shadow: 0 10px 7px -1px rgba(0, 0, 0, 0.2), 0px 3px 3px 1px rgba(0, 0, 0, 0.14), 3px 3px 5px 2px rgba(0, 0, 0, 0.12);
+//  border-radius: 10px;
+//  margin: auto 0;
+//  padding: 10px;
+//}
+
+.card {
+  min-width: 17rem;
+  max-width: 50rem;
+  max-height: 30%;
+  background: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 7px -1px rgba(0, 0, 0, 0.2), 0px 3px 3px 1px rgba(0, 0, 0, 0.14), 3px 3px 5px 2px rgba(0, 0, 0, 0.12);
+  margin: auto 0
+}
+
 }

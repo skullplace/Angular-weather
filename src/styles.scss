@@ -8,16 +8,16 @@ body {
     //background-position: center;
     //background-size: 50%;
 
-  img {
-    z-index: -2;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%;
-    opacity: 1;
-    min-width: 300px;
-  }
+  //img {
+  //  z-index: -2;
+  //  position: absolute;
+  //  top: 50%;
+  //  left: 50%;
+  //  transform: translate(-50%, -50%);
+  //  width: 50%;
+  //  opacity: 1;
+  //  min-width: 300px;
+  //}
 }
 
 html, body {
@@ -27,5 +27,11 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  //background-color: rgb(86, 71, 128);
+  //background-image: url("https://openweathermap.org/themes/openweathermap/assets/img/new-history-forecast-bulk.png"), linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+  //background-size: cover;
+  //background-position: center;
+  background: rgb(115,149,197);
+  background: linear-gradient(180deg, rgba(115,149,197,1) 34%, rgba(255,198,190,1) 100%);
 }
 

@@ -52,7 +52,7 @@ export type OpenWeatherSysDto = {
   id: number,
   country: OpenWeatherSysCountryDto,
   sunrise: number,
-  sunset: number
+  sunset: number,
 };
 
 export type OpenWeatherCloudsDto = {
