@@ -32,7 +32,9 @@ export const icons = {
   rainy: 'https://img.icons8.com/color/96/000000/heavy-rain.png',
   snow: 'https://img.icons8.com/color/96/000000/snow.png',
   clear: 'https://img.icons8.com/color/96/000000/summer.png',
+  'light snow': 'https://img.icons8.com/color/96/000000/snow.png',
   'scattered clouds': 'https://img.icons8.com/color/96/000000/partly-cloudy-day.png',
   'broken clouds': 'https://img.icons8.com/color/96/000000/partly-cloudy-day.png',
-  'overcast clouds' : 'https://img.icons8.com/color/96/000000/partly-cloudy-day.png'
+  'overcast clouds': 'https://img.icons8.com/color/96/000000/partly-cloudy-day.png',
+  'few clouds': 'https://img.icons8.com/color/96/000000/partly-cloudy-day.png',
 };

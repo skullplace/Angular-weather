@@ -52,7 +52,7 @@ export class RestService {
     return this.getInfoByIp().pipe(
       switchMap((info: IpApiDto) => {
         return this.httpService.get(this.URL_OPEN_WEATHER,
-          {location: `lat=${info.latitude}&lon=${info.latitude}`, key: this.KEY_OPEN_WEATHER});
+          {location: `lat=${info.latitude}&lon=${info.longitude}`, key: this.KEY_OPEN_WEATHER});
       })
     ).pipe(
       map((weatherInfo: OpenWeatherDto) => {
@@ -79,7 +79,8 @@ export class RestService {
    */
   getWeatherStack(): Observable<WeatherInfo> {
     return this.getInfoByIp().pipe(
-      switchMap((info: IpApiDto) => this.httpService.get(this.URL_WEATHER_STACK, {location: info.city, key: this.KEY_WEATHER_STACK})),
+      switchMap((info: IpApiDto) =>
+        this.httpService.get(this.URL_WEATHER_STACK, {location: info.region_name, key: this.KEY_WEATHER_STACK})),
     ).pipe(map((weatherInfo: WeatherStackDto) => {
         const {humidity, temperature, feelslike, pressure, wind_speed, wind_degree} = weatherInfo.current;
         return {

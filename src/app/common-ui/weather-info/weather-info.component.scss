@@ -1,6 +1,6 @@
 :host {
   width: 100%;
-  height: 90%;
+  //height: 90%;
   display: flex;
   justify-content: center;
 
@@ -17,7 +17,7 @@
     box-shadow: 0 10px 7px -1px rgba(0, 0, 0, 0.2), 0px 3px 3px 1px rgba(0, 0, 0, 0.14), 3px 3px 5px 2px rgba(0, 0, 0, 0.12);
     border-radius: 10px;
     margin: auto 0;
-    padding: 10px;
+    padding: 20px;
 
     &-item {
       margin: 7px;
@@ -47,11 +47,12 @@
       width: 100%;
       display: flex;
       flex-direction: row;
-      margin-top: 5%;
+      //margin-top: 5%;
+      align-items: flex-end;
       justify-content: space-between;
       overflow-x: auto;
       flex-shrink: 0;
-      flex-basis: 89px;
+      flex-basis: 101px;
       flex-grow: 1;
     }
 
@@ -88,18 +89,6 @@
     }
   }
 
-
-//weather-info {
-//  display: grid;
-//  width: 50%;
-//  height: 40%;
-//  min-height: 330px;
-//  background: rgba(0, 0, 0, 0.05);
-//  box-shadow: 0 10px 7px -1px rgba(0, 0, 0, 0.2), 0px 3px 3px 1px rgba(0, 0, 0, 0.14), 3px 3px 5px 2px rgba(0, 0, 0, 0.12);
-//  border-radius: 10px;
-//  margin: auto 0;
-//  padding: 10px;
-//}
 
 .card {
   min-width: 17rem;

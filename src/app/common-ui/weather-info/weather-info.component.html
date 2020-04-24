@@ -5,19 +5,12 @@
   <div class="weather-info-item weather-info-date">
     {{addition?.date}} {{weatherInfo?.date}} {{weatherInfo?.day}}
   </div>
-  <!--  <div class="weather-info-item weather-info-day">-->
-  <!--    {{addition?.day}} -->
-  <!--  </div>-->
-
   <div class="weather-info-item weather-info-temperature">
     {{weatherInfo?.temp}} {{addition?.degrees}}
   </div>
-
   <div class="weather-info-item weather-info-icon">
     <img [src]="weatherInfo?.icon"/>
   </div>
-
-
   <div class="weather-info-addition">
     <div class="weather-info-item weather-info-humidity">
       {{addition?.humidity}} {{weatherInfo?.humidity}} {{addition?.percent}}

@@ -7,6 +7,11 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
+  align-content: space-evenly;
+}
+
+.location-form {
+  //align-self: flex-end;
 }
 
 .input-field {
