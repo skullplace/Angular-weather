@@ -11,7 +11,6 @@ import {addition, getLabelDayByNumber} from '../common-ui-utils';
 })
 export class WeatherInfoComponent implements OnInit, OnChanges {
   @Input() data: WeatherInfo;
-  @Input() cameFrom: string;
 
   public weatherInfo: WeatherInfo;
   public addition;

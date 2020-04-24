@@ -28,7 +28,7 @@ export class RestService {
    * function, which sent hhtp request to OpenWeather.com
    * @return {Observable<OpenWeatherDto | any>}
    */
-  getOpenWeather(location?: string): Observable<WeatherInfo> {
+  getOpenWeather(location: string): Observable<WeatherInfo> {
     return this.httpService.get(this.URL_OPEN_WEATHER, {location: `q=${location.toLowerCase()}`, key: this.KEY_OPEN_WEATHER}).pipe(
       map((weatherInfo: OpenWeatherDto) => {
           return {
@@ -77,11 +77,31 @@ export class RestService {
    * function, which sent hhtp request to Weatherstack.com
    * @return {Observable<WeatherStackDto | any>}
    */
-  getWeatherStack(): Observable<WeatherInfo> {
+  getWeatherStackDefault(): Observable<WeatherInfo> {
     return this.getInfoByIp().pipe(
       switchMap((info: IpApiDto) =>
         this.httpService.get(this.URL_WEATHER_STACK, {location: info.region_name, key: this.KEY_WEATHER_STACK})),
     ).pipe(map((weatherInfo: WeatherStackDto) => {
+        const {humidity, temperature, feelslike, pressure, wind_speed, wind_degree} = weatherInfo.current;
+        return {
+          date: formatDate(new Date(weatherInfo.location.localtime_epoch * 1000), 'dd.MM.yyyy', 'en-US'),
+          day: getLabelDayByNumber(new Date(weatherInfo.location.localtime_epoch * 1000).getDay()),
+          humidity,
+          temp: temperature.toFixed(0),
+          feels_like: feelslike.toFixed(0),
+          pressure,
+          speed: wind_speed,
+          deg: wind_degree,
+          city: weatherInfo.location.name,
+          icon: icons[weatherInfo.current.weather_descriptions[0].toLowerCase()]
+        };
+      })
+    );
+  }
+
+  getWeatherStack(location: string): Observable<WeatherInfo> {
+    return this.httpService.get(this.URL_WEATHER_STACK, {location, key: this.KEY_WEATHER_STACK}).pipe(
+      map((weatherInfo: WeatherStackDto) => {
         const {humidity, temperature, feelslike, pressure, wind_speed, wind_degree} = weatherInfo.current;
         return {
           date: formatDate(new Date(weatherInfo.location.localtime_epoch * 1000), 'dd.MM.yyyy', 'en-US'),

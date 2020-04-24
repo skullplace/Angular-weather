@@ -14,9 +14,7 @@ import {interval} from 'rxjs';
 })
 export class OpenWeatherComponent implements OnInit {
   public form: FormGroup;
-
   public weatherInfo: WeatherInfo;
-  public isInputVisible = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,7 +40,6 @@ export class OpenWeatherComponent implements OnInit {
       this.restService.getOpenWeather(this.form.value.location).subscribe(weather => {
         this.weatherInfo = weather;
       });
-      this.isInputVisible = false;
     }
   }
 }
