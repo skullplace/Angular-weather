@@ -18,7 +18,7 @@ export const addition = {
   feels_like: 'Ощущается как ',
   celsius: '℃',
   pressure: 'Давление',
-  pressureUnit: 'мм. рт. ст.',
+  pressureUnit: 'гПа',
   speed: 'Скорость ветра ',
   speedUnit: 'м/с',
   deg: 'Направление ветра',
