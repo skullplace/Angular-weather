@@ -3,6 +3,10 @@ import {RestService} from '../../core-modules/rest-core-module/resources/rest.se
 import {OpenWeatherCoordsDto, WeatherStackDto} from '../../core-modules/rest-core-module/resources/rest-core-model';
 import {WeatherInfo} from '../../common-ui/resources/common-ui-model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {WeatherStackAction, WeatherStackDefaultAction} from '../../redux/reducers/weather-Info/weather-info.actions';
+import {Store} from '@ngrx/store';
+import {WeatherInfoState} from '../../redux/reducers/weather-Info/weather-info.reducer';
+import {selectOpenWeatherInfo, selectWeatherStackInfo} from '../../redux/reducers/weather-Info/weather-info.selector';
 
 @Component({
   selector: 'app-ip-or-coords',
@@ -17,7 +21,8 @@ export class WeatherStackComponent implements OnInit {
 
   constructor(
     private restService: RestService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private store$: Store<WeatherInfoState>
   ) { }
 
   ngOnInit(): void {
@@ -25,16 +30,16 @@ export class WeatherStackComponent implements OnInit {
       location: ''
     }, {Validators: Validators.minLength(3)});
 
-    this.restService.getWeatherStackDefault().subscribe(weather => {
-      this.weatherInfo = weather;
-    });
+    this.store$.dispatch(new WeatherStackDefaultAction({info: this.restService.getWeatherStackDefault()}));
+    this.store$.select(selectWeatherStackInfo).subscribe(v => v.subscribe(weather => this.weatherInfo = weather));
   }
 
   getWeather() {
     if (this.form.value.location) {
-      this.restService.getWeatherStack(this.form.value.location).subscribe(weather => {
-        this.weatherInfo = weather;
-      });
+
+      this.store$.dispatch(new WeatherStackDefaultAction({info: this.restService.getWeatherStack(this.form.value.location)}));
+      this.store$.select(selectWeatherStackInfo).subscribe(v => v.subscribe(weather => this.weatherInfo = weather));
+
     }
   }
 

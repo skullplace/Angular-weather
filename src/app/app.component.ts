@@ -2,6 +2,11 @@ import {Component, OnInit, Output} from '@angular/core';
 import {HttpService} from './core-modules/rest-core-module/services/http.service';
 import {Router, Routes} from '@angular/router';
 import {RestService} from './core-modules/rest-core-module/resources/rest.service';
+import {select, Store} from '@ngrx/store';
+
+import {Observable} from 'rxjs';
+
+
 
 @Component({
   selector: 'app-root',
@@ -15,6 +20,7 @@ export class AppComponent implements OnInit{
   constructor(
     private router: Router,
     private restService: RestService,
+    // private store$: Store<CountState>
     ) {}
 
   public routes = [
@@ -23,8 +29,23 @@ export class AppComponent implements OnInit{
 
   ];
 
+  // public count$: Observable<number> = this.store$.pipe(select(selectCount));
+  // public updatedAt$: Observable<number> = this.store$.pipe(select(selectUpdatedAt));
+
   ngOnInit(): void {
     this.restService.getIp();
   }
+  //
+  // increase() {
+  //   this.store$.dispatch(new CountIncreaseAction());
+  // }
+  //
+  // decrease() {
+  //   this.store$.dispatch(new CountDecreaseAction());
+  // }
+  //
+  // clear() {
+  //   this.store$.dispatch(new CountClearAction());
+  // }
 
 }
