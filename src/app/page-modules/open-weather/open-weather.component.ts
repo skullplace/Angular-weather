@@ -33,8 +33,9 @@ export class OpenWeatherComponent implements OnInit {
       location: ''
     }, {Validators: Validators.minLength(3)});
 
-    this.store$.dispatch(new OpenWeatherDefaultAction({info: this.restService.getOpenWeatherDefault()}));
-    this.store$.select(selectOpenWeatherInfo).subscribe(v => v.subscribe(weather => this.weatherInfo = weather));
+    this.store$.dispatch(new OpenWeatherDefaultAction());
+    this.store$.select(selectOpenWeatherInfo)
+      .subscribe(weather => this.weatherInfo = weather);
   }
 
   /**
@@ -42,8 +43,7 @@ export class OpenWeatherComponent implements OnInit {
    */
   getWeather(): void {
     if (this.form.value.location) {
-      this.store$.dispatch(new OpenWeatherAction({info: this.restService.getOpenWeather(this.form.value.location)}));
-      this.store$.select(selectOpenWeatherInfo).subscribe(v => v.subscribe(weather => this.weatherInfo = weather));
+      this.store$.dispatch(new OpenWeatherAction({query: this.form.value.location}));
     }
 
   }

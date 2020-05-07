@@ -38,7 +38,7 @@ export class RestService {
             temp: (weatherInfo.main.temp - 273).toFixed(0),
             feels_like: (weatherInfo.main.feels_like - 273).toFixed(0),
             pressure: weatherInfo.main.pressure,
-            speed: weatherInfo.wind.speed,
+            speed: weatherInfo.wind.speed.toFixed(0),
             deg: weatherInfo.wind.deg,
             city: weatherInfo.name,
             icon: icons[weatherInfo.weather[0].description.toLowerCase()]
@@ -56,7 +56,6 @@ export class RestService {
       })
     ).pipe(
       map((weatherInfo: OpenWeatherDto) => {
-        console.log(weatherInfo);
         return {
           date: formatDate(new Date(weatherInfo.dt * 1000), 'dd.MM.yyyy', 'en-US'),
           day: getLabelDayByNumber(new Date(weatherInfo.dt * 1000).getDay()),
@@ -64,7 +63,7 @@ export class RestService {
           temp: (weatherInfo.main.temp - 273).toFixed(0),
           feels_like: (weatherInfo.main.feels_like - 273).toFixed(0),
           pressure: weatherInfo.main.pressure,
-          speed: weatherInfo.wind.speed,
+          speed: weatherInfo.wind.speed.toFixed(0),
           deg: weatherInfo.wind.deg,
           city: weatherInfo.name,
           icon: icons[weatherInfo.weather[0].description.toLowerCase()]
@@ -90,7 +89,7 @@ export class RestService {
           temp: temperature.toFixed(0),
           feels_like: feelslike.toFixed(0),
           pressure,
-          speed: wind_speed,
+          speed: wind_speed.toFixed(0),
           deg: wind_degree,
           city: weatherInfo.location.name,
           icon: icons[weatherInfo.current.weather_descriptions[0].toLowerCase()]
@@ -110,7 +109,7 @@ export class RestService {
           temp: temperature.toFixed(0),
           feels_like: feelslike.toFixed(0),
           pressure,
-          speed: wind_speed,
+          speed: wind_speed.toFixed(0),
           deg: wind_degree,
           city: weatherInfo.location.name,
           icon: icons[weatherInfo.current.weather_descriptions[0].toLowerCase()]
