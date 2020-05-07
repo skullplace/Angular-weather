@@ -4,7 +4,7 @@ import {Observable, of} from 'rxjs';
 import {IpApiDto, IpIfyDto, IpWhoIsDto, OpenWeatherDto, WeatherStackDto} from './rest-core-model';
 import {map, switchMap, take, tap} from 'rxjs/operators';
 import {formatDate} from '@angular/common';
-import {getLabelDayByNumber, icons} from '../../../common-ui/common-ui-utils';
+import {getLabelDayByNumber, icons, services} from '../../../common-ui/common-ui-utils';
 import {WeatherInfo} from '../../../common-ui/resources/common-ui-model';
 
 @Injectable({
@@ -75,49 +75,49 @@ export class RestService {
 
   /**
    * function, which sent hhtp request to Weatherstack.com
-   * @return {Observable<WeatherInfo>}
+   * @return {Observable<WeatherStackDto | any>}
    */
-  getWeatherStackDefault(): Observable<WeatherInfo> {
-    return this.getInfoByIp().pipe(
-      switchMap((info: IpApiDto) =>
-        this.httpService.get(this.URL_WEATHER_STACK, {location: info.region_name, key: this.KEY_WEATHER_STACK})),
-    ).pipe(map((weatherInfo: WeatherStackDto) => {
-        const {humidity, temperature, feelslike, pressure, wind_speed, wind_degree} = weatherInfo.current;
-        return {
-          date: formatDate(new Date(weatherInfo.location.localtime_epoch * 1000), 'dd.MM.yyyy', 'en-US'),
-          day: getLabelDayByNumber(new Date(weatherInfo.location.localtime_epoch * 1000).getDay()),
-          humidity,
-          temp: temperature.toFixed(0),
-          feels_like: feelslike.toFixed(0),
-          pressure,
-          speed: wind_speed.toFixed(0),
-          deg: wind_degree,
-          city: weatherInfo.location.name,
-          icon: icons[weatherInfo.current.weather_descriptions[0].toLowerCase()]
-        };
-      })
-    );
-  }
+  // getWeatherStackDefault(): Observable<WeatherInfo> {
+  //   return this.getInfoByIp().pipe(
+  //     switchMap((info: IpApiDto) =>
+  //       this.httpService.get(this.URL_WEATHER_STACK, {location: info.region_name, key: this.KEY_WEATHER_STACK})),
+  //   ).pipe(map((weatherInfo: WeatherStackDto) => {
+  //       const {humidity, temperature, feelslike, pressure, wind_speed, wind_degree} = weatherInfo.current;
+  //       return {
+  //         date: formatDate(new Date(weatherInfo.location.localtime_epoch * 1000), 'dd.MM.yyyy', 'en-US'),
+  //         day: getLabelDayByNumber(new Date(weatherInfo.location.localtime_epoch * 1000).getDay()),
+  //         humidity,
+  //         temp: temperature.toFixed(0),
+  //         feels_like: feelslike.toFixed(0),
+  //         pressure,
+  //         speed: wind_speed.toFixed(0),
+  //         deg: wind_degree,
+  //         city: weatherInfo.location.name,
+  //         icon: icons[weatherInfo.current.weather_descriptions[0].toLowerCase()]
+  //       };
+  //     })
+  //   );
+  // }
 
-  getWeatherStack(location: string): Observable<WeatherInfo> {
-    return this.httpService.get(this.URL_WEATHER_STACK, {location, key: this.KEY_WEATHER_STACK}).pipe(
-      map((weatherInfo: WeatherStackDto) => {
-        const {humidity, temperature, feelslike, pressure, wind_speed, wind_degree} = weatherInfo.current;
-        return {
-          date: formatDate(new Date(weatherInfo.location.localtime_epoch * 1000), 'dd.MM.yyyy', 'en-US'),
-          day: getLabelDayByNumber(new Date(weatherInfo.location.localtime_epoch * 1000).getDay()),
-          humidity,
-          temp: temperature.toFixed(0),
-          feels_like: feelslike.toFixed(0),
-          pressure,
-          speed: wind_speed.toFixed(0),
-          deg: wind_degree,
-          city: weatherInfo.location.name,
-          icon: icons[weatherInfo.current.weather_descriptions[0].toLowerCase()]
-        };
-      })
-    );
-  }
+  // getWeatherStack(location: string): Observable<WeatherInfo> {
+  //   return this.httpService.get(this.URL_WEATHER_STACK, {location, key: this.KEY_WEATHER_STACK}).pipe(
+  //     map((weatherInfo: WeatherStackDto) => {
+  //       const {humidity, temperature, feelslike, pressure, wind_speed, wind_degree} = weatherInfo.current;
+  //       return {
+  //         date: formatDate(new Date(weatherInfo.location.localtime_epoch * 1000), 'dd.MM.yyyy', 'en-US'),
+  //         day: getLabelDayByNumber(new Date(weatherInfo.location.localtime_epoch * 1000).getDay()),
+  //         humidity,
+  //         temp: temperature.toFixed(0),
+  //         feels_like: feelslike.toFixed(0),
+  //         pressure,
+  //         speed: wind_speed.toFixed(0),
+  //         deg: wind_degree,
+  //         city: weatherInfo.location.name,
+  //         icon: icons[weatherInfo.current.weather_descriptions[0].toLowerCase()]
+  //       };
+  //     })
+  //   );
+  // }
 
   /**
    * function, that sent hhtp request to Ipwhois.com
@@ -129,4 +129,62 @@ export class RestService {
 
   getInfoByIp(): Observable<IpApiDto> {
     return this.getIp().pipe(
-      switchMap((ip: IpIfyDto) => this.httpService.get<IpApiDto>(this.URL_IPAPI_API, {location: ip.ip, key: this.K
+      switchMap((ip: IpIfyDto) => this.httpService.get<IpApiDto>(this.URL_IPAPI_API, {location: ip.ip, key: this.KEY_IPAPI_API}))
+    );
+  }
+
+  getWeatherStackO(location?: string): Observable<WeatherInfo> {
+    if (location) {
+       return this.httpService.get(this.URL_WEATHER_STACK, {location, key: this.KEY_WEATHER_STACK}).pipe(
+         map( (weatherInfo: WeatherStackDto) => {
+            return this.parseWeatherInfo(weatherInfo, services.weatherStack)
+         })
+       );
+    } else {
+      return this.getInfoByIp().pipe(
+        switchMap((info: IpApiDto) =>
+          this.httpService.get(this.URL_WEATHER_STACK, {location: info.region_name, key: this.KEY_WEATHER_STACK})),
+      ).pipe(
+        map( (weatherInfo: WeatherStackDto) => {
+          return this.parseWeatherInfo(weatherInfo, services.weatherStack);
+        })
+      );
+    }
+
+}
+
+  private parseWeatherInfo(weather: WeatherStackDto | OpenWeatherDto, service: string): WeatherInfo {
+    if (service === services.weatherStack) {
+      const {humidity, temperature, feelslike, pressure, wind_speed, wind_degree} = weather.current;
+      return {
+        date: formatDate(new Date(weather.location.localtime_epoch * 1000), 'dd.MM.yyyy', 'en-US'),
+        day: getLabelDayByNumber(new Date(weather.location.localtime_epoch * 1000).getDay()),
+        humidity,
+        temp: temperature.toFixed(0),
+        feels_like: feelslike.toFixed(0),
+        pressure,
+        speed: wind_speed.toFixed(0),
+        deg: wind_degree,
+        city: weather.location.name,
+        icon: icons[weather.current.weather_descriptions[0].toLowerCase()]
+      };
+    } else {
+      return {
+        date: formatDate(new Date(weather.dt * 1000), 'dd.MM.yyyy', 'en-US'),
+        day: getLabelDayByNumber(new Date(weather.dt * 1000).getDay()),
+        humidity: weather.main.humidity,
+        temp: (weather.main.temp - 273).toFixed(0),
+        feels_like: (weather.main.feels_like - 273).toFixed(0),
+        pressure: weather.main.pressure,
+        speed: weather.wind.speed.toFixed(0),
+        deg: weather.wind.deg,
+        city: weather.name,
+        icon: icons[weather.weather[0].description.toLowerCase()]
+      };
+    }
+  }
+
+
+}
+
+

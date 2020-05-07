@@ -74,7 +74,7 @@ export class WeatherInfoEffects {
       ofType(weatherInfoActionsType.weatherStack),
       switchMap(
         (location: WeatherStackAction) => {
-          return this.restService.getWeatherStack(location.payload.query);
+          return this.restService.getWeatherStackO(location.payload.query);
         },
       ),
       map((weather) =>
@@ -94,7 +94,7 @@ export class WeatherInfoEffects {
       ofType(weatherInfoActionsType.weatherStackDefault),
       switchMap(
         (location: WeatherStackDefaultAction) => {
-          return this.restService.getWeatherStackDefault();
+          return this.restService.getWeatherStackO();
         },
       ),
       map((weather) =>
