@@ -56,6 +56,7 @@ export class RestService {
       })
     ).pipe(
       map((weatherInfo: OpenWeatherDto) => {
+        console.log(weatherInfo);
         return {
           date: formatDate(new Date(weatherInfo.dt * 1000), 'dd.MM.yyyy', 'en-US'),
           day: getLabelDayByNumber(new Date(weatherInfo.dt * 1000).getDay()),
@@ -74,7 +75,7 @@ export class RestService {
 
   /**
    * function, which sent hhtp request to Weatherstack.com
-   * @return {Observable<WeatherStackDto | any>}
+   * @return {Observable<WeatherInfo>}
    */
   getWeatherStackDefault(): Observable<WeatherInfo> {
     return this.getInfoByIp().pipe(
@@ -128,8 +129,4 @@ export class RestService {
 
   getInfoByIp(): Observable<IpApiDto> {
     return this.getIp().pipe(
-      switchMap((ip: IpIfyDto) => this.httpService.get<IpApiDto>(this.URL_IPAPI_API, {location: ip.ip, key: this.KEY_IPAPI_API}))
-    );
-  }
-
-}
+      switchMap((ip: IpIfyDto) => this.httpService.get<IpApiDto>(this.URL_IPAPI_API, {location: ip.ip, key: this.K
