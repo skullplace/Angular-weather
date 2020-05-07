@@ -48,6 +48,6 @@ export const icons = {
 };
 
 export enum services {
-  openWeather = 'openWeather',
-  weatherStack = 'weatherStack',
+  openWeather = 'openweather.com',
+  weatherStack = 'weatherstack.com',
 }

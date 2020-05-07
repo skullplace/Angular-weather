@@ -16,8 +16,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import {reducers} from './redux/reducers';
-import { AppEffects } from './app.effects';
+import {reducers} from './redux';
+import { WeatherInfoEffects } from './redux/effects/weather-info.effects';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,7 @@ import { AppEffects } from './app.effects';
 
     StoreRouterConnectingModule.forRoot(),
 
-    EffectsModule.forFeature([AppEffects])
+    EffectsModule.forFeature([(WeatherInfoEffects)])
   ],
   exports: [
     MaterialCoreModule
@@ -59,3 +59,4 @@ import { AppEffects } from './app.effects';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

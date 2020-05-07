@@ -5,8 +5,10 @@ import {
   createSelector,
   MetaReducer
 } from '@ngrx/store';
-import {environment} from '../../../environments/environment';
-import {weatherInfoFeatureKey, WeatherInfoReducer, WeatherInfoState} from './weather-Info/weather-info.reducer';
+import {environment} from '../../environments/environment';
+import {weatherInfoFeatureKey, WeatherInfoState, WeatherInfoReducer} from './reducers/weather-info.reducer';
+import {WeatherInfo} from '../common-ui/resources/common-ui-model';
+
 
 export interface State {
   [weatherInfoFeatureKey]: WeatherInfoState;
@@ -14,6 +16,6 @@ export interface State {
 
 
 export const reducers: ActionReducerMap<State> = {
-  // @ts-ignore
   [weatherInfoFeatureKey]: WeatherInfoReducer
 };
+

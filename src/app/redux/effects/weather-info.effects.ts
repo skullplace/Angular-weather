@@ -7,17 +7,20 @@ import {
   LoadWeatherInfoSuccesAction,
   OpenWeatherAction, OpenWeatherDefaultAction,
   weatherInfoActionsType,
-  WeatherInfoUpdateAction, WeatherStackAction, WeatherStackDefaultAction
-} from './redux/reducers/weather-Info/weather-info.actions';
-import {RestService} from './core-modules/rest-core-module/resources/rest.service';
-import {of} from 'rxjs';
+  WeatherStackAction, WeatherStackDefaultAction
+} from '../actions/weather-info.actions';
+import {RestService} from '../../core-modules/rest-core-module/resources/rest.service';
+import {Observable, of} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {WeatherInfoState} from './redux/reducers/weather-Info/weather-info.reducer';
-import {services} from './common-ui/common-ui-utils';
+import {WeatherInfoState} from '../reducers/weather-info.reducer';
+import {services} from '../../common-ui/common-ui-utils';
 
+
+class WeatherInfoActions {
+}
 
 @Injectable()
-export class AppEffects {
+export class WeatherInfoEffects {
 
   constructor(
     private actions$: Actions,
@@ -26,40 +29,27 @@ export class AppEffects {
   ) {
   }
 
-  // @Effect()
-  // getWeatherInfo$() {
-  //   return this.actions$.pipe(
-  //     ofType(weatherInfoActionsType.weatherStackDefault,
-  //       weatherInfoActionsType.weatherStack),
-  //     catchError(error => of(new LoadWeatherInfoFailureAction())),
-  //     map(() => {
-  //       return new LoadWeatherInfoSuccesAction();
-  //     }),
-  //   );
-  // }
-
   @Effect()
-  getOpenWeatherInfo$() {
+  public getOpenWeatherInfo$(): Observable<WeatherInfoActions> {
     return this.actions$.pipe(
       ofType(weatherInfoActionsType.openWeather),
       switchMap(
-        (location: OpenWeatherAction) => {
-          return this.restService.getOpenWeather(location.payload.query);
-        },
+        (location: OpenWeatherAction) =>
+          this.restService.getOpenWeather(location.payload.query),
       ),
-      map( (weather) => {
-        this.store$.dispatch(new WeatherInfoUpdateAction({
+      map((weather) =>
+        new LoadWeatherInfoSuccesAction({
           info: weather,
-          service: services.openWeather
-        }));
-        return new LoadWeatherInfoSuccesAction();
-      } ),
+          service: services.openWeather,
+          query: weather.city
+        })
+      ),
       catchError(() => of(new LoadWeatherInfoFailureAction()))
     );
   }
 
   @Effect()
-  getOpenWeatherDefaultInfo$() {
+  public getOpenWeatherDefaultInfo$(): Observable<WeatherInfoActions> {
     return this.actions$.pipe(
       ofType(weatherInfoActionsType.openWeatherDefault),
       switchMap(
@@ -67,19 +57,19 @@ export class AppEffects {
           return this.restService.getOpenWeatherDefault();
         },
       ),
-      map( (weather) => {
-        this.store$.dispatch(new WeatherInfoUpdateAction({
+      map((weather) =>
+        new LoadWeatherInfoSuccesAction({
           info: weather,
-          service: services.openWeather
-        }));
-        return new LoadWeatherInfoSuccesAction();
-      } ),
+          service: services.openWeather,
+          query: weather.city
+        })
+      ),
       catchError(() => of(new LoadWeatherInfoFailureAction()))
     );
   }
 
   @Effect()
-  getWeatherStackInfo$() {
+  public getWeatherStackInfo$(): Observable<WeatherInfoActions> {
     return this.actions$.pipe(
       ofType(weatherInfoActionsType.weatherStack),
       switchMap(
@@ -87,19 +77,19 @@ export class AppEffects {
           return this.restService.getWeatherStack(location.payload.query);
         },
       ),
-      map( (weather) => {
-        this.store$.dispatch(new WeatherInfoUpdateAction({
+      map((weather) =>
+        new LoadWeatherInfoSuccesAction({
           info: weather,
-          service: services.weatherStack
-        }));
-        return new LoadWeatherInfoSuccesAction();
-      } ),
+          service: services.weatherStack,
+          query: weather.city
+        })
+      ),
       catchError(() => of(new LoadWeatherInfoFailureAction()))
     );
   }
 
   @Effect()
-  getWeatherStackDefaultInfo$() {
+  public getWeatherStackDefaultInfo$(): Observable<WeatherInfoActions> {
     return this.actions$.pipe(
       ofType(weatherInfoActionsType.weatherStackDefault),
       switchMap(
@@ -107,13 +97,13 @@ export class AppEffects {
           return this.restService.getWeatherStackDefault();
         },
       ),
-      map( (weather) => {
-        this.store$.dispatch(new WeatherInfoUpdateAction({
+      map((weather) =>
+        new LoadWeatherInfoSuccesAction({
           info: weather,
-          service: services.weatherStack
-        }));
-        return new LoadWeatherInfoSuccesAction();
-      } ),
+          service: services.weatherStack,
+          query: weather.city
+        })
+      ),
       catchError(() => of(new LoadWeatherInfoFailureAction()))
     );
   }

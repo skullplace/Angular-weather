@@ -1,15 +1,11 @@
-import {AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {HttpService} from '../../core-modules/rest-core-module/services/http.service';
 import {RestService} from '../../core-modules/rest-core-module/resources/rest.service';
-import {OpenWeatherDto} from '../../core-modules/rest-core-module/resources/rest-core-model';
 import {WeatherInfo} from '../../common-ui/resources/common-ui-model';
-import {interval} from 'rxjs';
 import {Store} from '@ngrx/store';
-import {WeatherInfoState} from '../../redux/reducers/weather-Info/weather-info.reducer';
-import {OpenWeatherAction, OpenWeatherDefaultAction, WeatherStackAction} from '../../redux/reducers/weather-Info/weather-info.actions';
-import {selectOpenWeatherInfo, selectWeatherInfoFeature} from '../../redux/reducers/weather-Info/weather-info.selector';
-import {map} from 'rxjs/operators';
+import {WeatherInfoState} from '../../redux/reducers/weather-info.reducer';
+import {OpenWeatherAction, OpenWeatherDefaultAction} from '../../redux/actions/weather-info.actions';
+import {selectWeatherInfo} from '../../redux/selectors/weather-info.selector';
 
 
 @Component({
@@ -34,8 +30,8 @@ export class OpenWeatherComponent implements OnInit {
     }, {Validators: Validators.minLength(3)});
 
     this.store$.dispatch(new OpenWeatherDefaultAction());
-    this.store$.select(selectOpenWeatherInfo)
-      .subscribe(weather => this.weatherInfo = weather);
+    this.store$.select(selectWeatherInfo)
+      .subscribe(weather => this.weatherInfo = weather[weather.length - 1]);
   }
 
   /**
