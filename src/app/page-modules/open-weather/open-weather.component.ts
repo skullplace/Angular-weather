@@ -6,6 +6,7 @@ import {Store} from '@ngrx/store';
 import {WeatherInfoState} from '../../redux/reducers/weather-info.reducer';
 import {OpenWeatherAction, OpenWeatherDefaultAction} from '../../redux/actions/weather-info.actions';
 import {selectWeatherInfo} from '../../redux/selectors/weather-info.selector';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class OpenWeatherComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private restService: RestService,
-    private store$: Store<WeatherInfoState>
+    private store$: Store<WeatherInfoState>,
   ) {
   }
 
@@ -41,6 +42,5 @@ export class OpenWeatherComponent implements OnInit {
     if (this.form.value.location) {
       this.store$.dispatch(new OpenWeatherAction({query: this.form.value.location}));
     }
-
   }
 }

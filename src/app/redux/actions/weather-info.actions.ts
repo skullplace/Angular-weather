@@ -10,6 +10,9 @@ export enum weatherInfoActionsType {
   weatherStackDefault = '[WEATHER_INFO] init data from weatherstack.com',
   success = '[WEATHER-INFO] load successful',
   failure = '[WEATHER-INFO] load failure',
+  vkPhoto = '[VK INFO] vk photo load',
+  vkProfile = '[VK INFO] vk name load',
+  vkSuccess = '[VK INFO] load succesful',
 }
 
 export class OpenWeatherAction implements Action {
@@ -40,7 +43,24 @@ export class LoadWeatherInfoSuccesAction implements Action {
 
 export class LoadWeatherInfoFailureAction implements Action {
   readonly type = weatherInfoActionsType.failure;
+  constructor( public payload: {error}) {}
+}
+
+export class LoadVkPhotoInfoAction implements Action {
+  readonly type = weatherInfoActionsType.vkPhoto;
+  constructor(public payload: {info: string}) {}
+}
+
+export class LoadVkProfileInfoAction implements Action {
+  readonly type = weatherInfoActionsType.vkProfile;
+  constructor(public payload: {info: string}) {}
+}
+
+export class LoadVkInfoSuccessAction implements Action {
+  readonly type = weatherInfoActionsType.vkSuccess;
+  constructor(public payload: {photo: string}) {}
 }
 
 export type WeatherInfoActions = OpenWeatherAction | WeatherStackAction | WeatherStackDefaultAction
-  | OpenWeatherDefaultAction| LoadWeatherInfoFailureAction | LoadWeatherInfoSuccesAction;
+  | OpenWeatherDefaultAction| LoadWeatherInfoFailureAction | LoadWeatherInfoSuccesAction
+  | LoadVkPhotoInfoAction | LoadVkInfoSuccessAction | LoadVkProfileInfoAction;

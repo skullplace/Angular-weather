@@ -9,3 +9,8 @@ export const selectWeatherInfo = createSelector(
   selectWeatherInfoFeature,
   (state: WeatherInfoState) => state.weatherInfo
 );
+
+export const selectVkInfo = createSelector(
+  selectWeatherInfoFeature,
+  (state: WeatherInfoState) => state.vkInfo
+);

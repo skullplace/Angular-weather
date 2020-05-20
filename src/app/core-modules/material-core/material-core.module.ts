@@ -4,13 +4,15 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
 
 const modules: any[] = [
  MatFormFieldModule,
   MatInputModule,
   MatButtonModule,
   MatTabsModule,
-  MatCardModule
+  MatCardModule,
+  MatIconModule
 ];
 
 @NgModule({

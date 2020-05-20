@@ -173,3 +173,35 @@ export type WeatherStackRequestDto = {
   language: string,
   unit: string,
 };
+
+export type VkApiDto = {
+  response: VkApiResponseDto
+};
+
+export type VkApiResponseDto = {
+  count: number,
+  items: VkApiResponseItem[]
+};
+
+export type VkApiResponseItem = {
+  album_id: number,
+  date: number,
+  height: number,
+  id: number,
+  owner_id: number,
+  photo_75: string,
+  photo_130: string,
+  photo_604: string,
+  photo_807: string,
+  photo_1280: string,
+  post_id: number,
+  text: string,
+  width: number,
+};
+
+export type VkInfo = {
+  photo: string,
+  owner_id: string,
+  name: string
+};
+

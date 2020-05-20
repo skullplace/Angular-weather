@@ -1,12 +1,23 @@
 <div class="content">
 
   <nav mat-tab-nav-bar backgroundColor="primary" color="accent" mat-align-tabs="center">
-<!--      <a mat-tab-link class="tab" routerLink="" routerLinkActive="active-tab" [routerLinkActiveOptions]="{exact: true}"> Погода по названию</a>-->
-<!--      <a mat-tab-link class="tab" routerLink="/alternative" routerLinkActive="active-tab"> Погода по ip или координатам</a>-->
     <a mat-tab-link *ngFor="let route of routes"
        [routerLink]="route.route"
        routerLinkActive="active-tab"
        [routerLinkActiveOptions]="{exact: true}" > {{route.name}} </a>
   </nav>
+
+  <div class="vk" *ngIf="isLogined; else notLogined">
+    <img [src]="image" alt="">
+  </div>
+  <ng-template #notLogined>
+    <div class="vk">
+      <a href="https://oauth.vk.com/authorize?client_id=7460067&display=page&redirect_uri=http://localhost:4200/&scope=photos&response_type=token&v=5.52" title="Войти через Вконтакте">
+        <mat-icon>account_circle</mat-icon>
+      </a>
+    </div>
+
+  </ng-template>
+
 </div>
   <router-outlet></router-outlet>

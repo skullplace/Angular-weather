@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 // import {countActionsType, CountUpdateAction} from './redux/reducers/count/counter.actions';
-import {catchError, map, switchMap} from 'rxjs/operators';
+import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {
+  LoadVkInfoSuccessAction, LoadVkPhotoInfoAction,
   LoadWeatherInfoFailureAction,
   LoadWeatherInfoSuccesAction,
   OpenWeatherAction, OpenWeatherDefaultAction,
@@ -44,7 +45,7 @@ export class WeatherInfoEffects {
           query: weather.city
         })
       ),
-      catchError(() => of(new LoadWeatherInfoFailureAction()))
+      catchError((err) => of(new LoadWeatherInfoFailureAction(err)))
     );
   }
 
@@ -54,7 +55,7 @@ export class WeatherInfoEffects {
       ofType(weatherInfoActionsType.openWeatherDefault),
       switchMap(
         (location: OpenWeatherDefaultAction) => {
-          return this.restService.getOpenWeatherDefault();
+          return this.restService.getOpenWeather();
         },
       ),
       map((weather) =>
@@ -64,7 +65,7 @@ export class WeatherInfoEffects {
           query: weather.city
         })
       ),
-      catchError(() => of(new LoadWeatherInfoFailureAction()))
+      catchError((err) => of(new LoadWeatherInfoFailureAction(err)))
     );
   }
 
@@ -74,7 +75,7 @@ export class WeatherInfoEffects {
       ofType(weatherInfoActionsType.weatherStack),
       switchMap(
         (location: WeatherStackAction) => {
-          return this.restService.getWeatherStackO(location.payload.query);
+          return this.restService.getWeatherStack(location.payload.query);
         },
       ),
       map((weather) =>
@@ -84,7 +85,7 @@ export class WeatherInfoEffects {
           query: weather.city
         })
       ),
-      catchError(() => of(new LoadWeatherInfoFailureAction()))
+      catchError((err) => of(new LoadWeatherInfoFailureAction(err)))
     );
   }
 
@@ -94,7 +95,7 @@ export class WeatherInfoEffects {
       ofType(weatherInfoActionsType.weatherStackDefault),
       switchMap(
         (location: WeatherStackDefaultAction) => {
-          return this.restService.getWeatherStackO();
+          return this.restService.getWeatherStack();
         },
       ),
       map((weather) =>
@@ -104,9 +105,28 @@ export class WeatherInfoEffects {
           query: weather.city
         })
       ),
-      catchError(() => of(new LoadWeatherInfoFailureAction()))
+      catchError((err) => of(new LoadWeatherInfoFailureAction(err)))
     );
   }
 
+  @Effect()
+  public getVkInfo$(): Observable<WeatherInfoActions> {
+    return this.actions$.pipe(
+      ofType(weatherInfoActionsType.vkPhoto),
+      switchMap ((userInfo: LoadVkPhotoInfoAction) => {
+        return this.restService.getVkPhoto(userInfo.payload.info);
+      }),
+      map( userInfo => new LoadVkInfoSuccessAction({
+        photo: userInfo.response.items[0].photo_75,
+      })),
+      switchMap( () => {
+        return this.restService.getVkProfileInfo();
+      }),
+      map( value => {
+        console.log(value);
+        return of(null);
+      } )
+    );
+  }
 
 }
