@@ -129,6 +129,7 @@
   },
   "defaultProject": "weather",
   "cli": {
+    "defaultCollection": "@ngrx/schematics",
     "analytics": false
   }
 }
